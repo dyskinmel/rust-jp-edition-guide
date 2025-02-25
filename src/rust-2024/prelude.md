@@ -111,7 +111,7 @@ fn main() {
 We can fix this so that it works on all editions by using fully qualified syntax:
 -->
 
-これをすべてのエディションで正しく動作させるためには、完全修飾構文を使う必要があります。
+完全修飾構文を使うと、すべてのエディションで正しく動作するようになります。
 
 ```rust,ignore
 fn main() {
