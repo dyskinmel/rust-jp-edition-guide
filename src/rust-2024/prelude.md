@@ -89,6 +89,7 @@ When two traits that are in scope have the same method name, it is ambiguous whi
 
 スコープ内にある二つのトレイトが同じメソッド名を持つ場合、どちらのトレイトメソッドを使うべきかが一意に決定できなくなってしまいます。例えば、次のコードをご覧ください。
 
+<!--
 ```rust,edition2021
 trait MyPoller {
     // This name is the same as the `poll` method on the `Future` trait from `std`.
@@ -106,6 +107,25 @@ fn main() {
     core::pin::pin!(async {}).poll();
 }
 ```
+-->
+
+```rust,edition2021
+trait MyPoller {
+    // この名前は、`std` の `Future` トレイトにある `poll` メソッドと同じです。
+    fn poll(&self) {
+        println!("polling");
+    }
+}
+
+impl<T> MyPoller for T {}
+
+fn main() {
+    // `Pin<&mut async {}>` は `std::future::Future` と `MyPoller` の両方を実装しています。
+    // 両方のトレイトがスコープ内にある場合（Rust 2024 ではこれが発生する）、
+    // どの `poll` メソッドを呼び出すかが曖昧になります。
+    core::pin::pin!(async {}).poll();
+}
+```
 
 <!-- 
 We can fix this so that it works on all editions by using fully qualified syntax:
@@ -113,13 +133,21 @@ We can fix this so that it works on all editions by using fully qualified syntax
 
 完全修飾構文を使うと、すべてのエディションで正しく動作するようになります。
 
+<!--
 ```rust,ignore
 fn main() {
     // Now it is clear which trait method we're referring to
     <_ as MyPoller>::poll(&core::pin::pin!(async {}));
 }
 ```
+-->
 
+```rust,ignore
+fn main() {
+    // これで、どのトレイトのメソッドを参照しているのかが明確になりました。
+    <_ as MyPoller>::poll(&core::pin::pin!(async {}));
+}
+```
 
 <!--
 The [`rust_2024_prelude_collisions`] lint will automatically modify any ambiguous method calls to use fully qualified syntax. This lint is part of the `rust-2024-compatibility` lint group, which will automatically be applied when running `cargo fix --edition`. To migrate your code to be Rust 2024 Edition compatible, run:
@@ -137,8 +165,15 @@ Alternatively, you can manually enable the lint to find places where these quali
 
 もしくは、完全修飾が必要な箇所を見つけるために、リントを手動で有効にすることもできます。
 
+<!--
 ```rust
 // Add this to the root of your crate to do a manual migration.
+#![warn(rust_2024_prelude_collisions)]
+```
+-->
+
+```rust
+// 手動で移行を行うには、クレートのルートにこれを追加してください。
 #![warn(rust_2024_prelude_collisions)]
 ```
 
