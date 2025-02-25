@@ -37,7 +37,7 @@ The [prelude of the standard library](../../std/prelude/index.html) is the modul
 It contains commonly used items such as `Option`, `Vec`, `drop`, and `Clone`.
 -->
 
-[標準ライブラリのプレリュード](https://doc.rust-lang.org/std/prelude/index.html) は、すべてのモジュールで自動的にインポートされる項目をまとめたモジュールです。例えば、`Option`、`Vec`、`drop`、`Clone` など、よく使われる項目が含まれます。
+[標準ライブラリのプレリュード](https://doc.rust-lang.org/std/prelude/index.html)は、すべてのモジュールで自動的にインポートされるアイテムをまとめたモジュールです。例えば、`Option`、`Vec`、`drop`、`Clone` など、よく使われるアイテムが含まれます。
 
 
 <!-- 
