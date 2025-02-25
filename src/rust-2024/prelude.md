@@ -55,7 +55,7 @@ However, adding a _trait_ to the prelude can break existing code in a subtle way
 For example, a call to `x.poll()` which comes from a `MyPoller` trait might fail to compile if `std`'s `Future` is also imported, because the call to `poll` is now ambiguous and could come from either trait.
 -->
 
-ただし、_トレイト_ をプレリュードに追加すると、既存のコードに微妙な影響が生じ壊れることがあります。たとえば、`MyPoller` というトレイトの `poll` メソッドを `x.poll()` と呼び出しているコードに、`std`　(標準ライブラリ)　の `Future` トレイトも同時にインポートされている場合、どちらの `poll` を呼ぶべきかが一意に決定できなくなり、コンパイルに失敗する可能性があります。
+ただし、*トレイト*をプレリュードに追加すると、既存のコードに微妙な影響が生じて壊れることがあります。たとえば、`MyPoller` というトレイトの `poll` メソッドを `x.poll()` と呼び出しているコードに、`std`（標準ライブラリ）の `Future` トレイトも同時にインポートされている場合、どちらの `poll` を呼ぶべきかが一意に決定できなくなり、コンパイルに失敗する可能性があります。
 
 <!-- 
 As a solution, Rust 2024 will use a new prelude.
