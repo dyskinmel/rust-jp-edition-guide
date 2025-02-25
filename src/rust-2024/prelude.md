@@ -48,7 +48,7 @@ then `use example::*;` will make `Option` unambiguously refer to the one from `e
 not the one from the standard library.
 -->
 
-Rust コンパイラは、Prelude からインポートされる項目よりも、明示的にインポートされた項目を優先します。たとえば、`example` というクレートやモジュールに `pub struct Option;` が定義されている場合、`use example::*;` とした場合、`Option` は標準ライブラリのものではなく `example` のものが使われます。
+Rust コンパイラは、プレリュードからインポートされるアイテムよりも、明示的にインポートされたアイテムを優先します。これにより、プレリュードに追加があっても既存のコードは壊れないようになっています。たとえば、`example` というクレートやモジュールに `pub struct Option;` が定義されている場合、`use example::*;` とした場合、`Option` は標準ライブラリのものではなく、必ず `example` のものが使われます。
 
 <!-- 
 However, adding a _trait_ to the prelude can break existing code in a subtle way.
