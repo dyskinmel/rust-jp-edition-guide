@@ -56,7 +56,7 @@ for x in my_boxed_slice.into_iter() {
 let my_boxed_slice: Box<[u32]> = vec![1, 2, 3].into_boxed_slice();
 // 注意：1.80以前のバージョンでは .into_iter() の呼び出しが必要です
 for x in my_boxed_slice.into_iter() {
-    // Rust 2024以前のエディションでは、x の型は &u32 です
+    // Rust 2024 以前のエディションでは、x の型は &u32 です
 }
 ```
 
@@ -79,7 +79,7 @@ for x in my_boxed_slice { // notice no need for calling .into_iter()
 ```rust
 // 1.80以降、すべてのエディションでの新しい動作
 let my_boxed_slice: Box<[u32]> = vec![1, 2, 3].into_boxed_slice();
-for x in my_boxed_slice { // .into_iter() の呼び出しは不要です
+for x in my_boxed_slice { // .into_iter() の呼び出しは不要になっています
     // x の型は u32 です
 }
 ```
